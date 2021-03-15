@@ -1,26 +1,28 @@
 package com.juanminango.workshop_mongo.resources;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.juanminango.workshop_mongo.domain.User;
+import com.juanminango.workshop_mongo.services.UserService;
 
 @RestController
 @RequestMapping(value="/users")
-public class UserResource {
+public class UserResource { //O Controllador Rest accesa ao Service e o service accesa por sua vez ao repository
 
+	@Autowired
+	private UserService service;
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<User>> findAll(){
-		User maria = new User("1", "Maria Brown", "maria@gmail.com");
-		User alex = new User("2", "Alex Bravo", "alex@gmail.com");
-		List<User> list = new ArrayList<>(); //List eh interface, devemos implementar uma instanciacao da interface
-		list.addAll(Arrays.asList(maria,alex));
+		//List<User> list = new ArrayList<>(); //List eh interface, devemos implementar uma instanciacao da interface
+		List<User> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 
 	}
