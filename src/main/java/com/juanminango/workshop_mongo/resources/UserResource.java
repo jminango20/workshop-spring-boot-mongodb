@@ -54,4 +54,16 @@ public class UserResource { //O Controllador Rest accesa ao Service e o service 
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+
+	//352
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody UserDTO objDTO, @PathVariable String id){
+		User obj = service.fromDTO(objDTO);
+		obj.setId(id); //id da requesicao
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
+	}
+	
+	
+	
 }
