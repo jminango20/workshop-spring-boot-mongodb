@@ -48,4 +48,10 @@ public class UserResource { //O Controllador Rest accesa ao Service e o service 
 		return ResponseEntity.created(uri).build(); //resposta vazia, com codigo 201 e com cabecalho contendo a localizacao do novo recurso criado
 	}
 	
+	//351
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<UserDTO> delete(@PathVariable String id){
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+	}
 }
